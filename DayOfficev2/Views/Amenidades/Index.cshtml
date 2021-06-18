@@ -1,0 +1,33 @@
+﻿@model IEnumerable<DayOfficev2.Models.tblAmenidades>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Amenidades</h2>
+
+<p>
+    @Html.ActionLink("Crear", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Amenidad
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoAmenidad)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.IdAmenidad }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.IdAmenidad }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.IdAmenidad })
+        </td>
+    </tr>
+}
+
+</table>

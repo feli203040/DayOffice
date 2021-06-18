@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f2f8b4f3157d4efab29d0d6cf803e620" Name="Diagram1">
+        <EntityTypeShape EntityType="dbDayOfficeModel.tblAmenidades" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbDayOfficeModel.tblAmenidadEspacio" Width="1.5" PointX="5" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbDayOfficeModel.tblEspacio" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbDayOfficeModel.tblUsuario" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="dbDayOfficeModel.FK__tblAmenid__IdAme__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="dbDayOfficeModel.FK__tblAmenid__IdEsp__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="dbDayOfficeModel.FK__tblEspaci__IdUsu__36B12243" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dbDayOfficeModel.sysdiagrams" Width="1.5" PointX="6.875" PointY="4" />
+        <EntityTypeShape EntityType="dbDayOfficeModel.tblRoles" Width="1.5" PointX="0.875" PointY="5.25" />
+        <AssociationConnector Association="dbDayOfficeModel.FK__tblUsuario__Rol__59063A47" />
+        <EntityTypeShape EntityType="dbDayOfficeModel.tblReservas" Width="1.5" PointX="5.125" PointY="0.5" />
+        <AssociationConnector Association="dbDayOfficeModel.FK__tblReserv__IdEsp__619B8048" />
+        <AssociationConnector Association="dbDayOfficeModel.FK__tblReserv__IdUsu__60A75C0F" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

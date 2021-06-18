@@ -1,0 +1,25 @@
+﻿@model DayOfficev2.Models.tblAmenidades
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detailles</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Amenidad:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoAmenidad)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdAmenidad }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>

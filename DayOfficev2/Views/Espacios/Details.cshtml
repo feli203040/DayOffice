@@ -1,0 +1,57 @@
+﻿@model DayOfficev2.Models.tblEspacio
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detailles</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombre:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreEspacio)
+        </dd>
+
+        <dt>
+            Latitud:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LatitudEspacio)
+        </dd>
+
+        <dt>
+            Longitud:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LongitudEspacio)
+        </dd>
+
+        <dt>
+            Costo:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Costo)
+        </dd>
+
+        <dt>
+            Usuario:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblUsuario.NombreUsuario)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdEspacio }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>

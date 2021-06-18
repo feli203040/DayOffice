@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbDayOfficeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblAmenidades">
+    <Key>
+      <PropertyRef Name="IdAmenidad" />
+    </Key>
+    <Property Name="IdAmenidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TipoAmenidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblAmenidadEspacio" Relationship="Self.FK__tblAmenid__IdAme__34C8D9D1" FromRole="tblAmenidades" ToRole="tblAmenidadEspacio" />
+  </EntityType>
+  <EntityType Name="tblAmenidadEspacio">
+    <Key>
+      <PropertyRef Name="IdAmenidadEspcio" />
+    </Key>
+    <Property Name="IdAmenidadEspcio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdEspacio" Type="Int32" Nullable="false" />
+    <Property Name="IdAmenidad" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblAmenidades" Relationship="Self.FK__tblAmenid__IdAme__34C8D9D1" FromRole="tblAmenidadEspacio" ToRole="tblAmenidades" />
+    <NavigationProperty Name="tblEspacio" Relationship="Self.FK__tblAmenid__IdEsp__35BCFE0A" FromRole="tblAmenidadEspacio" ToRole="tblEspacio" />
+  </EntityType>
+  <EntityType Name="tblEspacio">
+    <Key>
+      <PropertyRef Name="IdEspacio" />
+    </Key>
+    <Property Name="IdEspacio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+    <Property Name="NombreEspacio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LatitudEspacio" Type="Double" Nullable="false" />
+    <Property Name="LongitudEspacio" Type="Double" Nullable="false" />
+    <Property Name="Costo" Type="Double" Nullable="false" />
+    <NavigationProperty Name="tblAmenidadEspacio" Relationship="Self.FK__tblAmenid__IdEsp__35BCFE0A" FromRole="tblEspacio" ToRole="tblAmenidadEspacio" />
+    <NavigationProperty Name="tblUsuario" Relationship="Self.FK__tblEspaci__IdUsu__36B12243" FromRole="tblEspacio" ToRole="tblUsuario" />
+    <Property Name="Puntaje" Type="Double" />
+    <NavigationProperty Name="tblReservas" Relationship="dbDayOfficeModel.FK__tblReserv__IdEsp__619B8048" FromRole="tblEspacio" ToRole="tblReservas" />
+    <Property Name="VelocidadInternet" Type="Double" />
+    <Property Name="Selected" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblUsuario">
+    <Key>
+      <PropertyRef Name="IdUsuario" />
+    </Key>
+    <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LongitudUsuario" Type="Double" />
+    <Property Name="LatitudUsuario" Type="Double" />
+    <Property Name="Rol" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblEspacio" Relationship="Self.FK__tblEspaci__IdUsu__36B12243" FromRole="tblUsuario" ToRole="tblEspacio" />
+    <NavigationProperty Name="tblRoles" Relationship="dbDayOfficeModel.FK__tblUsuario__Rol__59063A47" FromRole="tblUsuario" ToRole="tblRoles" />
+    <NavigationProperty Name="tblReservas" Relationship="dbDayOfficeModel.FK__tblReserv__IdUsu__60A75C0F" FromRole="tblUsuario" ToRole="tblReservas" />
+  </EntityType>
+  <Association Name="FK__tblAmenid__IdAme__34C8D9D1">
+    <End Role="tblAmenidades" Type="Self.tblAmenidades" Multiplicity="1" />
+    <End Role="tblAmenidadEspacio" Type="Self.tblAmenidadEspacio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblAmenidades">
+        <PropertyRef Name="IdAmenidad" />
+      </Principal>
+      <Dependent Role="tblAmenidadEspacio">
+        <PropertyRef Name="IdAmenidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblAmenid__IdEsp__35BCFE0A">
+    <End Role="tblEspacio" Type="Self.tblEspacio" Multiplicity="1" />
+    <End Role="tblAmenidadEspacio" Type="Self.tblAmenidadEspacio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEspacio">
+        <PropertyRef Name="IdEspacio" />
+      </Principal>
+      <Dependent Role="tblAmenidadEspacio">
+        <PropertyRef Name="IdEspacio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblEspaci__IdUsu__36B12243">
+    <End Role="tblUsuario" Type="Self.tblUsuario" Multiplicity="1" />
+    <End Role="tblEspacio" Type="Self.tblEspacio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="tblEspacio">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbDayOfficeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblAmenidades" EntityType="Self.tblAmenidades" />
+    <EntitySet Name="tblAmenidadEspacio" EntityType="Self.tblAmenidadEspacio" />
+    <EntitySet Name="tblEspacio" EntityType="Self.tblEspacio" />
+    <EntitySet Name="tblUsuario" EntityType="Self.tblUsuario" />
+    <AssociationSet Name="FK__tblAmenid__IdAme__34C8D9D1" Association="Self.FK__tblAmenid__IdAme__34C8D9D1">
+      <End Role="tblAmenidades" EntitySet="tblAmenidades" />
+      <End Role="tblAmenidadEspacio" EntitySet="tblAmenidadEspacio" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblAmenid__IdEsp__35BCFE0A" Association="Self.FK__tblAmenid__IdEsp__35BCFE0A">
+      <End Role="tblEspacio" EntitySet="tblEspacio" />
+      <End Role="tblAmenidadEspacio" EntitySet="tblAmenidadEspacio" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblEspaci__IdUsu__36B12243" Association="Self.FK__tblEspaci__IdUsu__36B12243">
+      <End Role="tblUsuario" EntitySet="tblUsuario" />
+      <End Role="tblEspacio" EntitySet="tblEspacio" />
+    </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="dbDayOfficeModel.sysdiagrams" />
+    <EntitySet Name="tblRoles" EntityType="dbDayOfficeModel.tblRoles" />
+    <AssociationSet Name="FK__tblUsuario__Rol__59063A47" Association="dbDayOfficeModel.FK__tblUsuario__Rol__59063A47">
+      <End Role="tblRoles" EntitySet="tblRoles" />
+      <End Role="tblUsuario" EntitySet="tblUsuario" />
+    </AssociationSet>
+    <EntitySet Name="tblReservas" EntityType="dbDayOfficeModel.tblReservas" />
+    <AssociationSet Name="FK__tblReserv__IdEsp__619B8048" Association="dbDayOfficeModel.FK__tblReserv__IdEsp__619B8048">
+      <End Role="tblEspacio" EntitySet="tblEspacio" />
+      <End Role="tblReservas" EntitySet="tblReservas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblReserv__IdUsu__60A75C0F" Association="dbDayOfficeModel.FK__tblReserv__IdUsu__60A75C0F">
+      <End Role="tblUsuario" EntitySet="tblUsuario" />
+      <End Role="tblReservas" EntitySet="tblReservas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tblRoles">
+    <Key>
+      <PropertyRef Name="IdRol" />
+    </Key>
+    <Property Name="IdRol" Type="Int32" Nullable="false" />
+    <Property Name="NombreRol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblUsuario" Relationship="dbDayOfficeModel.FK__tblUsuario__Rol__59063A47" FromRole="tblRoles" ToRole="tblUsuario" />
+  </EntityType>
+  <Association Name="FK__tblUsuario__Rol__59063A47">
+    <End Type="dbDayOfficeModel.tblRoles" Role="tblRoles" Multiplicity="1" />
+    <End Type="dbDayOfficeModel.tblUsuario" Role="tblUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRoles">
+        <PropertyRef Name="IdRol" />
+      </Principal>
+      <Dependent Role="tblUsuario">
+        <PropertyRef Name="Rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblReservas">
+    <Key>
+      <PropertyRef Name="IdReserva" />
+    </Key>
+    <Property Name="IdReserva" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+    <Property Name="IdEspacio" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblEspacio" Relationship="dbDayOfficeModel.FK__tblReserv__IdEsp__619B8048" FromRole="tblReservas" ToRole="tblEspacio" />
+    <NavigationProperty Name="tblUsuario" Relationship="dbDayOfficeModel.FK__tblReserv__IdUsu__60A75C0F" FromRole="tblReservas" ToRole="tblUsuario" />
+    <Property Name="IdDueno" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__tblReserv__IdEsp__619B8048">
+    <End Type="dbDayOfficeModel.tblEspacio" Role="tblEspacio" Multiplicity="1" />
+    <End Type="dbDayOfficeModel.tblReservas" Role="tblReservas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEspacio">
+        <PropertyRef Name="IdEspacio" />
+      </Principal>
+      <Dependent Role="tblReservas">
+        <PropertyRef Name="IdEspacio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblReserv__IdUsu__60A75C0F">
+    <End Type="dbDayOfficeModel.tblUsuario" Role="tblUsuario" Multiplicity="1" />
+    <End Type="dbDayOfficeModel.tblReservas" Role="tblReservas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="tblReservas">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,63 @@
+﻿@model DayOfficev2.Models.tblEspacio
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar Espacio</h2>
+
+<h3>Deseas eliminar este espacio?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombre:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreEspacio)
+        </dd>
+
+        <dt>
+            Latitud:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LatitudEspacio)
+        </dd>
+
+        <dt>
+            Longitud:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LongitudEspacio)
+        </dd>
+
+        <dt>
+            Costo:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Costo)
+        </dd>
+
+        <dt>
+            Usuario:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblUsuario.NombreUsuario)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Cancelar", "Index")
+        </div>
+    }
+</div>

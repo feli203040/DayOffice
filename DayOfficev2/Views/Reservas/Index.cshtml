@@ -1,0 +1,30 @@
+﻿@model IEnumerable<DayOfficev2.Models.tblReservas>
+
+<h2>Reservas</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Espacio
+        </th>
+        <th>
+            Usuario
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblEspacio.NombreEspacio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblUsuario.NombreUsuario)
+        </td>
+        <td>
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.IdReserva })
+        </td>
+    </tr>
+}
+
+</table>

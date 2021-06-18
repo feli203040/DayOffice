@@ -1,0 +1,31 @@
+﻿@model DayOfficev2.Models.tblAmenidades
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Deseas eliminar esta amenidad?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Amenidad:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoAmenidad)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Cancelar", "Index")
+        </div>
+    }
+</div>

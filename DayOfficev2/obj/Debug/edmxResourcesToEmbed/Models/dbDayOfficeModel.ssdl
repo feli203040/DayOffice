@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbDayOfficeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tblAmenidades">
+    <Key>
+      <PropertyRef Name="IdAmenidad" />
+    </Key>
+    <Property Name="IdAmenidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TipoAmenidad" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblAmenidadEspacio">
+    <Key>
+      <PropertyRef Name="IdAmenidadEspcio" />
+    </Key>
+    <Property Name="IdAmenidadEspcio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdEspacio" Type="int" Nullable="false" />
+    <Property Name="IdAmenidad" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblEspacio">
+    <Key>
+      <PropertyRef Name="IdEspacio" />
+    </Key>
+    <Property Name="IdEspacio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdUsuario" Type="int" Nullable="false" />
+    <Property Name="NombreEspacio" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LatitudEspacio" Type="float" Nullable="false" />
+    <Property Name="LongitudEspacio" Type="float" Nullable="false" />
+    <Property Name="Costo" Type="float" Nullable="false" />
+    <Property Name="Puntaje" Type="float" />
+    <Property Name="VelocidadInternet" Type="float" />
+    <Property Name="Selected" Type="int" />
+  </EntityType>
+  <EntityType Name="tblReservas">
+    <Key>
+      <PropertyRef Name="IdReserva" />
+    </Key>
+    <Property Name="IdReserva" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdUsuario" Type="int" Nullable="false" />
+    <Property Name="IdEspacio" Type="int" Nullable="false" />
+    <Property Name="IdDueno" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblRoles">
+    <Key>
+      <PropertyRef Name="IdRol" />
+    </Key>
+    <Property Name="IdRol" Type="int" Nullable="false" />
+    <Property Name="NombreRol" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblUsuario">
+    <Key>
+      <PropertyRef Name="IdUsuario" />
+    </Key>
+    <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CorreoElectronico" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contrasena" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LongitudUsuario" Type="float" />
+    <Property Name="LatitudUsuario" Type="float" />
+    <Property Name="Rol" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__tblAmenid__IdAme__34C8D9D1">
+    <End Role="tblAmenidades" Type="Self.tblAmenidades" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblAmenidadEspacio" Type="Self.tblAmenidadEspacio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblAmenidades">
+        <PropertyRef Name="IdAmenidad" />
+      </Principal>
+      <Dependent Role="tblAmenidadEspacio">
+        <PropertyRef Name="IdAmenidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblAmenid__IdEsp__35BCFE0A">
+    <End Role="tblEspacio" Type="Self.tblEspacio" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblAmenidadEspacio" Type="Self.tblAmenidadEspacio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEspacio">
+        <PropertyRef Name="IdEspacio" />
+      </Principal>
+      <Dependent Role="tblAmenidadEspacio">
+        <PropertyRef Name="IdEspacio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblEspaci__IdUsu__36B12243">
+    <End Role="tblUsuario" Type="Self.tblUsuario" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblEspacio" Type="Self.tblEspacio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="tblEspacio">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblReserv__IdEsp__619B8048">
+    <End Role="tblEspacio" Type="Self.tblEspacio" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblReservas" Type="Self.tblReservas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEspacio">
+        <PropertyRef Name="IdEspacio" />
+      </Principal>
+      <Dependent Role="tblReservas">
+        <PropertyRef Name="IdEspacio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblUsuario__Rol__59063A47">
+    <End Role="tblRoles" Type="Self.tblRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblUsuario" Type="Self.tblUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRoles">
+        <PropertyRef Name="IdRol" />
+      </Principal>
+      <Dependent Role="tblUsuario">
+        <PropertyRef Name="Rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbDayOfficeModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblAmenidades" EntityType="Self.tblAmenidades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblAmenidadEspacio" EntityType="Self.tblAmenidadEspacio" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEspacio" EntityType="Self.tblEspacio" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblReservas" EntityType="Self.tblReservas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblRoles" EntityType="Self.tblRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUsuario" EntityType="Self.tblUsuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__tblAmenid__IdAme__34C8D9D1" Association="Self.FK__tblAmenid__IdAme__34C8D9D1">
+      <End Role="tblAmenidades" EntitySet="tblAmenidades" />
+      <End Role="tblAmenidadEspacio" EntitySet="tblAmenidadEspacio" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblAmenid__IdEsp__35BCFE0A" Association="Self.FK__tblAmenid__IdEsp__35BCFE0A">
+      <End Role="tblEspacio" EntitySet="tblEspacio" />
+      <End Role="tblAmenidadEspacio" EntitySet="tblAmenidadEspacio" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblEspaci__IdUsu__36B12243" Association="Self.FK__tblEspaci__IdUsu__36B12243">
+      <End Role="tblUsuario" EntitySet="tblUsuario" />
+      <End Role="tblEspacio" EntitySet="tblEspacio" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblReserv__IdEsp__619B8048" Association="Self.FK__tblReserv__IdEsp__619B8048">
+      <End Role="tblEspacio" EntitySet="tblEspacio" />
+      <End Role="tblReservas" EntitySet="tblReservas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblUsuario__Rol__59063A47" Association="Self.FK__tblUsuario__Rol__59063A47">
+      <End Role="tblRoles" EntitySet="tblRoles" />
+      <End Role="tblUsuario" EntitySet="tblUsuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

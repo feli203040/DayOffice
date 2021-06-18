@@ -1,0 +1,65 @@
+﻿@model DayOfficev2.Models.tblUsuario
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombre:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreUsuario)
+        </dd>
+
+        <dt>
+            Correo:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CorreoElectronico)
+        </dd>
+
+        <dt>
+            Contraseña:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contrasena)
+        </dd>
+
+        <dt>
+            Longitud:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LongitudUsuario)
+        </dd>
+
+        <dt>
+            Latitud:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LatitudUsuario)
+        </dd>
+
+        <dt>
+            Rol:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rol)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdUsuario }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>

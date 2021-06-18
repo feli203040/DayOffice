@@ -1,0 +1,68 @@
+﻿@model IEnumerable<DayOfficev2.Models.tblEspacio>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Espacios de Trabajo</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Latitud
+        </th>
+        <th>
+            Longitud
+        </th>
+        <th>
+            Costo
+        </th>
+        <th>
+            Usuario
+        </th>
+        <th>
+            Puntaje
+        </th>
+        
+        <th>
+            Velocidad Internet
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.NombreEspacio)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LatitudEspacio)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LongitudEspacio)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Costo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.tblUsuario.NombreUsuario)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Puntaje)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.VelocidadInternet)
+    </td>
+    <td>
+        @Html.ActionLink("Amenidades", "IndexAmenidad", new { id = item.IdEspacio }) |
+        @Html.ActionLink("Reservar", "Reservar", new { id = item.IdEspacio }) |
+        @Html.ActionLink("Comparar", "Comparar", new { id = item.IdEspacio })
+    </td>
+</tr>
+    }
+
+</table>
+

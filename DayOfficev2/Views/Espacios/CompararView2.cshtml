@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DayOfficev2.Models.tblEspacio>
+@using DayOfficev2.Models;
+
+@{
+    dbDayOfficeEntities db = new dbDayOfficeEntities();
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreEspacio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VelocidadInternet)
+        </th>
+        <th>
+            Amenidades
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreEspacio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VelocidadInternet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tblAmenidadEspacio))
+            </td>
+            @{
+                foreach (var amenidad in db.tblAmenidadEspacio)
+                {
+                    if (amenidad.IdEspacio == item.IdEspacio)
+                    {
+                        var amenidadEspacio = db.tblAmenidades.Find(amenidad.IdAmenidad);
+                        <td>
+                            @amenidadEspacio.TipoAmenidad
+                        </td>
+                    }
+
+                }
+            }
+            <td>
+                @Html.ActionLink("Eliminar", "Eliminar", new { id = item.IdEspacio })
+            </td>
+        </tr>
+    }
+
+</table>
